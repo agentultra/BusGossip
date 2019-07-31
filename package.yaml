@@ -1,0 +1,55 @@
+name:                BusGossip
+version:             0.1.0.0
+github:              "githubuser/BusGossip"
+license:             BSD3
+author:              "James King"
+maintainer:          "james@agentultra.com"
+copyright:           "2019 James King"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/BusGossip#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+  - containers
+  - mtl
+  - semigroups
+
+executables:
+  BusGossip-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - BusGossip
+
+tests:
+  BusGossip-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - BusGossip
+    - containers
+    - hspec
+    - mtl
