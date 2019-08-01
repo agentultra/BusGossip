@@ -94,8 +94,8 @@ tickSimTime = do
 
 updateSim :: State Sim (Maybe Int)
 updateSim = do
-  moveDrivers
   updateDriverGossips
+  moveDrivers
   tickSimTime
   sim <- get
   if allGossipShared (simDrivers sim)

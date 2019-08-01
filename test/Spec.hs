@@ -82,16 +82,16 @@ main = hspec $ do
         expectedState
 
   describe "updateSim" $ do
-    it "should update the entire simulation one minute" $ do
+    it "should update the entire simulation" $ do
       let d1 = Driver 'A' (Route $ 1 :| [2]) 1 []
           d2 = Driver 'B' (Route $ 1 :| [2, 3]) 2 []
           initState = Sim [d1, d2] 0
           expectedState
             = Sim
-            [ d1 { driverStop = 0, driverGossips = ['B'] }
-            , d2 { driverStop = 0, driverGossips = ['A'] }
+            [ d1 { driverStop = 1, driverGossips = ['B'] }
+            , d2 { driverStop = 1, driverGossips = ['A'] }
             ]
-            1
+            2
       execState updateSim initState `shouldBe` expectedState
 
   describe "allGossipShared" $ do
@@ -134,4 +134,4 @@ main = hspec $ do
     it "should return a solution if one exists" $ do
       let d1 = Driver 'A' (Route $ 1 :| [2]) 0 []
           d2 = Driver 'B' (Route $ 2 :| [3, 4, 2]) 0 []
-      runSim [d1, d2] `shouldBe` Just 3
+      runSim [d1, d2] `shouldBe` Just 4
